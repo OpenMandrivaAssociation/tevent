@@ -7,16 +7,16 @@
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.8
+Version: 0.9.10
 # Shipped in samba4 without internal version:
 Epoch: %epoch
-Release: %mkrel 3
+Release: %mkrel 1
 Group: System/Libraries
 Summary: Samba4's event management library
 Source: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz
-Source1: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz.asc
+Source1: http://samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Patch1: samba4-fix-tevent-link-order.patch
-BuildRequires: talloc-devel
+BuildRequires: talloc-devel python-talloc pkgconfig(pytalloc-util)
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
@@ -42,18 +42,24 @@ Requires: %libtevent = %{epoch}:%{version}-%{release}
 %description -n %teventdevel
 Development files for Samba4's event management library
 
+%package -n python-tevent
+Group: Development/Python
+Summary: Python module for Samba4's event management library
+
+%description -n python-tevent
+Python module for Samba4's event management library
+
 %prep
 %setup -q
-%patch1 -p3 -b .linkorder
+#patch1 -p3 -b .linkorder
 
 %build
-%configure
+%configure2_5x
 %make
 
 %install
 rm -Rf %{buildroot}
 %makeinstall_std
-ln -s libtevent.so.%{teventmajor} %{buildroot}/%{_libdir}/libtevent.so
 
 %clean
 rm -Rf %{buildroot}
@@ -70,7 +76,10 @@ rm -Rf %{buildroot}
 %files -n %teventdevel
 %defattr(-,root,root)
 %{_libdir}/libtevent.so
-%{_libdir}/libtevent.a
 %{_includedir}/tevent.h
 #%{_includedir}/tevent_internal.h
 %{_libdir}/pkgconfig/tevent.pc
+
+%files -n python-tevent
+%defattr(-,root,root)
+%{py_platsitedir}/_tevent.so
