@@ -54,6 +54,7 @@ Python module for Samba4's event management library
 #patch1 -p3 -b .linkorder
 
 %build
+export PYTHONDIR=%{py_platsitedir}
 %configure2_5x
 %make
 
