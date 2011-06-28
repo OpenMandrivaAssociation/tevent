@@ -7,7 +7,7 @@
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.11
+Version: 0.9.12
 # Shipped in samba4 without internal version:
 Epoch: %epoch
 Release: %mkrel 1
