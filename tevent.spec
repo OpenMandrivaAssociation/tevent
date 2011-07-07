@@ -10,7 +10,7 @@ License: GPLv3
 Version: 0.9.12
 # Shipped in samba4 without internal version:
 Epoch: %epoch
-Release: %mkrel 1
+Release: %mkrel 2
 Group: System/Libraries
 Summary: Samba4's event management library
 Source: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz
