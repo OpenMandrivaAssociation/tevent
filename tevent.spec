@@ -3,20 +3,29 @@
 
 %define libtevent %mklibname tevent %teventmajor
 %define teventdevel %mklibname -d tevent
+%define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
+if [ -d "$GNUPGHOME" ] \
+then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
+fi \
+install -d -m700 $GNUPGHOME \
+gpg --import %{1} \
+gpg --trust-model always --verify %{2} \
+rm -Rf $GNUPGHOME \
 
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.12
+Version: 0.9.14
 # Shipped in samba4 without internal version:
 Epoch: %epoch
-Release: %mkrel 2
+Release: %mkrel 1
 Group: System/Libraries
 Summary: Samba4's event management library
 Source: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz
 Source1: http://samba.org/ftp/tevent/tevent-%{version}.tar.asc
+Source2: samba-bugs.asc
 Patch1: samba4-fix-tevent-link-order.patch
-BuildRequires: talloc-devel python-talloc pkgconfig(pytalloc-util)
+BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
@@ -50,6 +59,14 @@ Summary: Python module for Samba4's event management library
 Python module for Samba4's event management library
 
 %prep
+VERIFYSOURCE=%{SOURCE0}
+VERIFYSOURCE=${VERIFYSOURCE%%.gz}
+gzip -dc %{SOURCE0} > $VERIFYSOURCE
+
+%check_sig %{SOURCE2} %{SOURCE1} $VERIFYSOURCE
+
+rm -f $VERIFYSOURCE
+
 %setup -q
 #patch1 -p3 -b .linkorder
 
