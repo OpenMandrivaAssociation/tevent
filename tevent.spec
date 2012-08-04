@@ -1,5 +1,16 @@
 %define teventmajor	0
 %define epoch 1
+%define beta beta5
+%define official 0
+
+# Unofficial builds are extracted from the samba4 source tarball using
+# cd samba-4.$VERSION
+# mkdir -p tevent-%version/lib
+# cp -a lib/tevent/* tevent-%version/
+# cp -a lib/talloc tevent-%version/lib/
+# cp -a lib/replace tevent-%version/lib/
+# cp -a buildtools tevent-%version
+# tar cf tevent-%version.tar tevent-%version
 
 %define libtevent %mklibname tevent %teventmajor
 %define teventdevel %mklibname -d tevent
@@ -15,15 +26,21 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.15
+Version: 0.9.16
 # Shipped in samba4 without internal version:
 Epoch: %epoch
+%if "%beta" != ""
+Release: 0.%beta.1
+%else
 Release: 1
+%endif
 Group: System/Libraries
 Summary: Samba4's event management library
-Source0: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz
+Source0: http://samba.org/ftp/tevent/tevent-%{version}.tar.xz
+%if %official
 Source1: http://samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-bugs.asc
+%endif
 Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
 
@@ -58,6 +75,7 @@ Summary: Python module for Samba4's event management library
 Python module for Samba4's event management library
 
 %prep
+%if %official
 VERIFYSOURCE=%{SOURCE0}
 VERIFYSOURCE=${VERIFYSOURCE%%.gz}
 gzip -dc %{SOURCE0} > $VERIFYSOURCE
@@ -65,6 +83,7 @@ gzip -dc %{SOURCE0} > $VERIFYSOURCE
 %check_sig %{SOURCE2} %{SOURCE1} $VERIFYSOURCE
 
 rm -f $VERIFYSOURCE
+%endif
 
 %setup -q
 #patch1 -p3 -b .linkorder
