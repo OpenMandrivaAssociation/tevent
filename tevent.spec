@@ -1,6 +1,6 @@
 %define teventmajor	0
 %define epoch 1
-%define beta beta5
+%define beta beta6
 %define official 0
 
 # Unofficial builds are extracted from the samba4 source tarball using
