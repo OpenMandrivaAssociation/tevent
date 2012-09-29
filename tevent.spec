@@ -26,7 +26,7 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.16
+Version: 0.9.17
 # Shipped in samba4 without internal version:
 Epoch: %epoch
 %if "%beta" != ""
@@ -36,7 +36,7 @@ Release: 1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
-Source0: http://samba.org/ftp/tevent/tevent-%{version}.tar.xz
+Source0: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz
 %if %official
 Source1: http://samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-bugs.asc
