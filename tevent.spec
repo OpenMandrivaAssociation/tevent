@@ -1,6 +1,5 @@
 %define teventmajor	0
-%define epoch 1
-%define beta beta8
+%define beta %nil
 %define official 0
 
 # Unofficial builds are extracted from the samba4 source tarball using
@@ -28,7 +27,7 @@ URL: http://tevent.samba.org/
 License: GPLv3
 Version: 0.9.17
 # Shipped in samba4 without internal version:
-Epoch: %epoch
+Epoch: 1
 %if "%beta" != ""
 Release: 0.%beta.1
 %else
@@ -36,10 +35,10 @@ Release: 1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
-Source0: http://samba.org/ftp/tevent/tevent-%{version}.tar.gz
+Source0: http://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
 %if %official
-Source1: http://samba.org/ftp/tevent/tevent-%{version}.tar.asc
-Source2: samba-bugs.asc
+Source1: http://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
+Source2: samba-pubkey.asc
 %endif
 Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
