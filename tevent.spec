@@ -25,7 +25,7 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.19
+Version: 0.9.20
 # Shipped in samba4 without internal version:
 Epoch: 1
 %if "%beta" != ""
@@ -96,7 +96,11 @@ rm -f $VERIFYSOURCE
 
 %build
 export PYTHONDIR=%{py_platsitedir}
-%configure2_5x
+%setup_compile_flags
+./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
+           --bundled-libraries=NONE \
+           --builtin-libraries=replace
+
 %make
 
 %install
