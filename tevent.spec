@@ -25,7 +25,7 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.20
+Version: 0.9.21
 # Shipped in samba4 without internal version:
 Epoch: 1
 %if "%beta" != ""
@@ -95,7 +95,9 @@ rm -f $VERIFYSOURCE
 #patch1 -p3 -b .linkorder
 
 %build
-export PYTHONDIR=%{py_platsitedir}
+export PYTHONDIR=%{py2_platsitedir}
+export PYTHON=%{_bindir}/python2
+sed -i 's!python!python2!g' buildtools/bin/waf
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
            --bundled-libraries=NONE \
@@ -116,5 +118,5 @@ export PYTHONDIR=%{py_platsitedir}
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py_platsitedir}/_tevent.so
-%{py_platsitedir}/tevent.py
+%{py2_platsitedir}/_tevent.so
+%{py2_platsitedir}/tevent.py
