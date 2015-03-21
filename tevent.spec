@@ -25,19 +25,19 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: http://tevent.samba.org/
 License: GPLv3
-Version: 0.9.19
+Version: 0.9.22
 # Shipped in samba4 without internal version:
 Epoch: 1
 %if "%beta" != ""
 Release: 0.%beta.1
 %else
-Release: 2
+Release: 1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
-Source0: http://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
+Source0: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
 %if %official
-Source1: http://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
+Source1: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-pubkey.asc
 %endif
 Patch1: samba4-fix-tevent-link-order.patch
@@ -45,7 +45,7 @@ BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2
 
 %track
 prog %name = {
-	url = http://www.samba.org/ftp/tevent/
+	url = https://www.samba.org/ftp/tevent/
 	regex = %name-(__VER__)\.tar\.gz
 	version = %version
 }
