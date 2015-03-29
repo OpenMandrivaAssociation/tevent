@@ -95,9 +95,9 @@ rm -f $VERIFYSOURCE
 #patch1 -p3 -b .linkorder
 
 %build
-export PYTHONDIR=%{py_platsitedir}
-export PYTHON=%{_bindir}/python
-#sed -i 's!python!python2!g' buildtools/bin/waf
+export PYTHONDIR=%{py2_platsitedir}
+export PYTHON=%{_bindir}/python2
+sed -i 's!python!python2!g' buildtools/bin/waf
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
            --bundled-libraries=NONE \
@@ -118,5 +118,5 @@ export PYTHON=%{_bindir}/python
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py_platsitedir}/_tevent.so
-%{py_platsitedir}/tevent.py
+%{py2_platsitedir}/_tevent.so
+%{py2_platsitedir}/tevent.py
