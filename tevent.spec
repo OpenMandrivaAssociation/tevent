@@ -23,21 +23,21 @@ gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
 Name: tevent
-URL: http://tevent.samba.org/
+URL: https://tevent.samba.org/
 License: GPLv3
-Version: 0.9.21
+Version: 0.9.24
 # Shipped in samba4 without internal version:
 Epoch: 1
 %if "%beta" != ""
 Release: 0.%beta.1
 %else
-Release: 8
+Release: 1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
-Source0: http://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
+Source0: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
 %if %official
-Source1: http://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
+Source1: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-pubkey.asc
 %endif
 Patch1: samba4-fix-tevent-link-order.patch
@@ -45,7 +45,7 @@ BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2
 
 %track
 prog %name = {
-	url = http://www.samba.org/ftp/tevent/
+	url = https://www.samba.org/ftp/tevent/
 	regex = %name-(__VER__)\.tar\.gz
 	version = %version
 }
@@ -95,9 +95,9 @@ rm -f $VERIFYSOURCE
 #patch1 -p3 -b .linkorder
 
 %build
-export PYTHONDIR=%{py2_platsitedir}
-export PYTHON=%{_bindir}/python2
-sed -i 's!python!python2!g' buildtools/bin/waf
+export PYTHONDIR=%{py_platsitedir}
+export PYTHON=%{_bindir}/python
+#sed -i 's!python!python2!g' buildtools/bin/waf
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
            --bundled-libraries=NONE \
@@ -118,5 +118,5 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py2_platsitedir}/_tevent.so
-%{py2_platsitedir}/tevent.py
+%{py_platsitedir}/_tevent.so
+%{py_platsitedir}/tevent.py
