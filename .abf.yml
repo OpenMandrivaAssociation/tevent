@@ -1,4 +1,2 @@
-removed_sources:
-  tevent-0.9.30.tar.gz: 8a88dfedef278305992d563ec3b99ee1cb5cff77
 sources:
-  tevent-0.9.31.tar.gz: 328a2e179c398d081dc9277659542fd1ff079434
+  tevent-0.9.32.tar.gz: 94a712880f6ffc83f53449ca831eaa84d6fa30b7
