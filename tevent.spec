@@ -43,13 +43,6 @@ Source2: samba-pubkey.asc
 Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
 
-%track
-prog %name = {
-	url = https://www.samba.org/ftp/tevent/
-	regex = %name-(__VER__)\.tar\.gz
-	version = %version
-}
-
 %description
 Tevent is an event system based on the talloc memory management library. It is
 the core event system used in Samba. Tevent has support for many event types,
@@ -95,8 +88,8 @@ rm -f $VERIFYSOURCE
 #patch1 -p3 -b .linkorder
 
 %build
-export PYTHONDIR=%{py2_platsitedir}
-export PYTHON=%{_bindir}/python2
+#export PYTHONDIR=%{py2_platsitedir}
+#export PYTHON=%{_bindir}/python2
 sed -i 's!python!python2!g' buildtools/bin/waf
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
@@ -118,5 +111,6 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py2_platsitedir}/_tevent.so
-%{py2_platsitedir}/tevent.py
+%{py_platsitedir}/__pycache__/*
+%{py_platsitedir}/_tevent.*.so
+%{py_platsitedir}/tevent.py
