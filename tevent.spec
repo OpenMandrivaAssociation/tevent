@@ -31,7 +31,7 @@ Epoch: 1
 %if "%beta" != ""
 Release: 1.%beta.1
 %else
-Release: 1
+Release: 2
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
