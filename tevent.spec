@@ -44,6 +44,7 @@ Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
 BuildRequires: pkgconfig(libtirpc)
 BuildRequires: pkgconfig(python2)
+BuildRequires: pkgconfig(python3)
 
 %description
 Tevent is an event system based on the talloc memory management library. It is
@@ -113,6 +114,6 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py_platsitedir}/__pycache__/*
-%{py_platsitedir}/_tevent.*.so
-%{py_platsitedir}/tevent.py
+%{py2_platsitedir}/__pycache__/*
+%{py2_platsitedir}/_tevent.*.so
+%{py2_platsitedir}/tevent.py
