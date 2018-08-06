@@ -43,6 +43,7 @@ Source2: samba-pubkey.asc
 Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
 BuildRequires: pkgconfig(libtirpc)
+BuildRequires: pkgconfig(python2)
 
 %description
 Tevent is an event system based on the talloc memory management library. It is
