@@ -114,6 +114,6 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py2_platsitedir}/__pycache__/*
-%{py2_platsitedir}/_tevent.*.so
-%{py2_platsitedir}/tevent.py
+%{py_platsitedir}/__pycache__/*
+%{py_platsitedir}/_tevent.*.so
+%{py_platsitedir}/tevent.py
