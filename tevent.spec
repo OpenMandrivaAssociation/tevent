@@ -1,6 +1,8 @@
 %define teventmajor	0
 %define beta %nil
 %define official 0
+%global _python_bytecompile_build 0
+
 
 # Unofficial builds are extracted from the samba4 source tarball using
 # cd samba-4.$VERSION
@@ -110,10 +112,8 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %files -n %teventdevel
 %{_libdir}/libtevent.so
 %{_includedir}/tevent.h
-#%{_includedir}/tevent_internal.h
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%optional %{py2_platsitedir}/__pycache__/*
 %{py2_platsitedir}/_tevent.so
 %{py2_platsitedir}/tevent.py
