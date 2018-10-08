@@ -25,13 +25,13 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version: 0.9.35
+Version: 0.9.37
 # Shipped in samba4 without internal version:
 Epoch: 1
 %if "%beta" != ""
 Release: 1.%beta.1
 %else
-Release: 1
+Release: 2
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
@@ -42,13 +42,9 @@ Source2: samba-pubkey.asc
 %endif
 Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
-
-%track
-prog %name = {
-	url = https://www.samba.org/ftp/tevent/
-	regex = %name-(__VER__)\.tar\.gz
-	version = %version
-}
+BuildRequires: pkgconfig(libtirpc)
+BuildRequires: pkgconfig(python2)
+BuildRequires: pkgconfig(python3)
 
 %description
 Tevent is an event system based on the talloc memory management library. It is
@@ -95,7 +91,7 @@ rm -f $VERIFYSOURCE
 #patch1 -p3 -b .linkorder
 
 %build
-export PYTHONDIR=%{py2_platsitedir}
+#export PYTHONDIR=%{py2_platsitedir}
 export PYTHON=%{_bindir}/python2
 sed -i 's!python!python2!g' buildtools/bin/waf
 %setup_compile_flags
@@ -118,5 +114,6 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
+%optional %{py2_platsitedir}/__pycache__/*
 %{py2_platsitedir}/_tevent.so
 %{py2_platsitedir}/tevent.py
