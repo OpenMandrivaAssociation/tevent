@@ -31,7 +31,7 @@ Epoch: 1
 %if "%beta" != ""
 Release: 1.%beta.1
 %else
-Release: 1
+Release: 2
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
@@ -92,7 +92,7 @@ rm -f $VERIFYSOURCE
 
 %build
 #export PYTHONDIR=%{py2_platsitedir}
-#export PYTHON=%{_bindir}/python2
+export PYTHON=%{_bindir}/python2
 sed -i 's!python!python2!g' buildtools/bin/waf
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
@@ -114,6 +114,6 @@ sed -i 's!python!python2!g' buildtools/bin/waf
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py_platsitedir}/__pycache__/*
-%{py_platsitedir}/_tevent.*.so
-%{py_platsitedir}/tevent.py
+%optional %{py2_platsitedir}/__pycache__/*
+%{py2_platsitedir}/_tevent.so
+%{py2_platsitedir}/tevent.py
