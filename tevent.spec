@@ -27,13 +27,13 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version: 0.9.37
+Version: 0.9.38
 # Shipped in samba4 without internal version:
 Epoch: 1
 %if "%beta" != ""
 Release: 1.%beta.1
 %else
-Release: 3
+Release: 1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
@@ -96,6 +96,7 @@ rm -f $VERIFYSOURCE
 #export PYTHONDIR=%{py2_platsitedir}
 export PYTHON=%{_bindir}/python2
 sed -i 's!python!python2!g' buildtools/bin/waf
+sed -i 's!WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf!WAF_BINARY=/usr/bin/python2 ./buildtools/bin/waf!' Makefile
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
            --bundled-libraries=NONE \
