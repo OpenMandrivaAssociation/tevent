@@ -30,10 +30,11 @@ License: GPLv3
 Version: 0.9.38
 # Shipped in samba4 without internal version:
 Epoch: 1
+Patch0:	large.patch
 %if "%beta" != ""
 Release: 1.%beta.1
 %else
-Release: 1
+Release: 2
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
@@ -42,7 +43,6 @@ Source0: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
 Source1: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-pubkey.asc
 %endif
-Patch1: samba4-fix-tevent-link-order.patch
 BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
 BuildRequires: pkgconfig(libtirpc)
 BuildRequires: pkgconfig(python2)
@@ -90,7 +90,7 @@ rm -f $VERIFYSOURCE
 %endif
 
 %setup -q
-#patch1 -p3 -b .linkorder
+%apply_patches
 
 %build
 #export PYTHONDIR=%{py2_platsitedir}
