@@ -40,7 +40,7 @@ Source0: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
 Source1: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-pubkey.asc
 %endif
-BuildRequires: talloc-devel >= 2.0.6 python-talloc
+BuildRequires: talloc-devel >= 2.0.6 python-talloc %{_lib}pytalloc-util-devel
 BuildRequires: pkgconfig(libtirpc)
 BuildRequires: pkgconfig(python3)
 
