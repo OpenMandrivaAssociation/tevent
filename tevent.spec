@@ -27,14 +27,11 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version: 0.9.38
-# Shipped in samba4 without internal version:
-Epoch: 1
-Patch0:	large.patch
+Version: 0.10.0
 %if "%beta" != ""
-Release: 1.%beta.1
+Release: 0.%beta.1
 %else
-Release: 2
+Release: 1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
@@ -43,9 +40,8 @@ Source0: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.gz
 Source1: https://www.samba.org/ftp/tevent/tevent-%{version}.tar.asc
 Source2: samba-pubkey.asc
 %endif
-BuildRequires: talloc-devel >= 2.0.6 python-talloc pkgconfig(pytalloc-util) >= 2.0.6
+BuildRequires: talloc-devel >= 2.0.6 python-talloc
 BuildRequires: pkgconfig(libtirpc)
-BuildRequires: pkgconfig(python2)
 BuildRequires: pkgconfig(python3)
 
 %description
@@ -65,8 +61,8 @@ Samba4's event management library
 %package -n %teventdevel
 Group: Development/C
 Summary: Development files for Samba4's event management library
-Provides: tevent-devel = %{epoch}:%{version}-%{release}
-Requires: %libtevent = %{epoch}:%{version}-%{release}
+Provides: tevent-devel = %{EVRD}
+Requires: %libtevent = %{EVRD}
 
 %description -n %teventdevel
 Development files for Samba4's event management library
@@ -93,10 +89,6 @@ rm -f $VERIFYSOURCE
 %apply_patches
 
 %build
-#export PYTHONDIR=%{py2_platsitedir}
-export PYTHON=%{_bindir}/python2
-sed -i 's!python!python2!g' buildtools/bin/waf
-sed -i 's!WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf!WAF_BINARY=/usr/bin/python2 ./buildtools/bin/waf!' Makefile
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-rpath \
            --bundled-libraries=NONE \
@@ -116,5 +108,5 @@ sed -i 's!WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf!WAF_BINARY=/usr/bin/pyth
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py2_platsitedir}/_tevent.so
-%{py2_platsitedir}/tevent.py
+%{py_platsitedir}/_tevent*.so
+%{py_platsitedir}/tevent.py
