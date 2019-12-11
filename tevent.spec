@@ -29,9 +29,9 @@ URL: https://tevent.samba.org/
 License: GPLv3
 Version:	0.10.1
 %if "%beta" != ""
-Release:	1
+Release:	2
 %else
-Release:	1
+Release:	2
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
