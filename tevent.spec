@@ -2,6 +2,8 @@
 %define beta %nil
 %define official 0
 %global _python_bytecompile_build 0
+# For the python module
+%global _disable_ld_no_undefined 1
 
 
 # Unofficial builds are extracted from the samba4 source tarball using
@@ -27,11 +29,11 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version:	0.10.1
+Version:	0.10.2
 %if "%beta" != ""
-Release:	2
+Release:	0.%{beta}.1
 %else
-Release:	2
+Release:	1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
