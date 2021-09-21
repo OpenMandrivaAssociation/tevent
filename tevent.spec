@@ -45,6 +45,7 @@ Source2: samba-pubkey.asc
 BuildRequires: talloc-devel >= 2.0.6 python-talloc %{_lib}pytalloc-util-devel
 BuildRequires: pkgconfig(libtirpc)
 BuildRequires: pkgconfig(python3)
+BuildRequires: pkgconfig(cmocka) >= 1.1.3
 
 %description
 Tevent is an event system based on the talloc memory management library. It is
