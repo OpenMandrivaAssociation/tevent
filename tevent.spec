@@ -29,9 +29,9 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version:	0.13.0
+Version:	0.14.0
 %if "%beta" != ""
-Release:	0.%{beta}.1
+Release:	0.%{beta}1
 %else
 Release:	1
 %endif
