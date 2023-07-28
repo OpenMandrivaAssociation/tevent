@@ -29,11 +29,11 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version:	0.14.1
+Version:	0.15.0
 %if "%beta" != ""
 Release:	0.%{beta}1
 %else
-Release:	2
+Release:	1
 %endif
 Group: System/Libraries
 Summary: Samba4's event management library
