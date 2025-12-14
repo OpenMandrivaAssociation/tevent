@@ -29,7 +29,7 @@ rm -Rf $GNUPGHOME \
 Name: tevent
 URL: https://tevent.samba.org/
 License: GPLv3
-Version:	0.16.2
+Version:	0.17.1
 %if "%beta" != ""
 Release:	0.%{beta}.1
 %else
@@ -46,6 +46,7 @@ BuildRequires: talloc-devel >= 2.0.6 python-talloc %{_lib}pytalloc-util-devel
 BuildRequires: pkgconfig(libtirpc)
 BuildRequires: pkgconfig(python3)
 BuildRequires: pkgconfig(cmocka) >= 1.1.3
+BuildRequires: make
 
 %description
 Tevent is an event system based on the talloc memory management library. It is
@@ -111,5 +112,5 @@ rm -f $VERIFYSOURCE
 %{_libdir}/pkgconfig/tevent.pc
 
 %files -n python-tevent
-%{py_platsitedir}/_tevent*.so
-%{py_platsitedir}/tevent.py
+%{py_sitedir}/_%{name}.cpython*.so
+%{py_sitedir}/%{name}.py
